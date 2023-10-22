@@ -11,10 +11,20 @@ var con = mysql.createConnection({
   database: "mydb"
 });
 
+
+
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
 });
+
+
+
+
+
+app.get('/index.js', (req, res) => {res.sendFile("index.js",{root:__dirname})});
+app.get('/index.css', (req, res) => {res.sendFile("index.css",{root:__dirname})});
+
 
 
 app.get('/', (req, res) => {
@@ -23,7 +33,7 @@ app.get('/', (req, res) => {
     con.query("SELECT * FROM productos", function (err, result) {
       if (err) throw err;
       //console.log("Result: " + result);
-      res.send(result)
+      res.sendFile("index.html",{root:__dirname})
     });
 
 
