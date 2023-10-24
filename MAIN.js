@@ -14,7 +14,7 @@ var con = mysql.createConnection({
 
 
 con.connect(function(err) {
-  if (err) throw err;
+  // if (err) throw err;
   console.log("Connected!");
 });
 
@@ -41,16 +41,11 @@ app.get('/tables/productos', (req, res) => {
 
 
 app.get('/', (req, res) => {
-
-
-
-
     console.log("Connected!");
     res.sendFile("index.html",{root:__dirname})
-
-
-  //res.send('Hello World!')
 })
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

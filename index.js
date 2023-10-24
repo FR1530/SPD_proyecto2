@@ -3,6 +3,7 @@
 var ID_GLOBAL = 0
 function add_fila(){
 	ID_GLOBAL+=1
+
 	let tabla = document.getElementById("tabla")
 		tableRow = document.createElement("tr")
 		id = document.createElement("td")
@@ -13,8 +14,8 @@ function add_fila(){
 		cantidad.textContent = 0
 		precio = document.createElement("td")
 		precio.textContent = 0
-		borrar = document.createElement("td")
-		borrar.textContent = "delete"
+		borrar = document.createElement("button")
+		borrar.textContent = "Eliminar producto"
 
 
 		tabla.appendChild(tableRow)
@@ -33,10 +34,10 @@ function add_fila(){
 		producto.classList.add("filas")
 		cantidad.classList.add("filas")
 		precio.classList.add("filas")
+		borrar.classList.add('btn')
+
 
 }
-
-
 
 function main(){
 
@@ -53,8 +54,8 @@ function main(){
 		cantidad.textContent = i*100
 		precio = document.createElement("td")
 		precio.textContent = i*100
-		borrar = document.createElement("td")
-		borrar.textContent = "delete"
+		borrar = document.createElement("button")
+		borrar.textContent = "Eliminar producto"
 
 
 
@@ -75,6 +76,9 @@ function main(){
 		producto.classList.add("filas")
 		cantidad.classList.add("filas")
 		precio.classList.add("filas")
+		borrar.classList.add('btn')
+
+		
 
 	}
 
