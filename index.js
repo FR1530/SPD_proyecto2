@@ -10,6 +10,50 @@ function __add_element(element_name="div" ,text_content=""){
 
 
 
+
+
+
+
+function validar_informacion(){
+
+	productos = leer_tabla()
+	let valor_ret = true
+	for(let i=0; i < productos.length;i++){
+
+			console.log(productos[i])
+			if(isNaN(productos[i].precio) || isNaN(productos[i].cantidad)){
+				tabla = document.getElementById("tabla")
+				tabla.childNodes[i+2].classList.add("error")
+				valor_ret = false
+			}else{
+				tabla.childNodes[i+2].classList.remove("error")
+			}
+		}
+		
+
+		for(let i=0; i < productos.length && valor_ret;i++){
+				tabla.childNodes[i+2].classList.remove("error")
+			}
+		if(valor_ret == false){alert("hay algun dato invalido")}
+		return valor_ret
+
+
+
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 retorna un array de objetos con todas las entradas de la tabla 
 */ 
@@ -41,27 +85,33 @@ function __add_fila(id=0,producto="",precio=0,cantidad=0){
 	let _producto = __add_element("td",producto)
 	let _precio = __add_element("td",precio)
 	let _cantidad = __add_element("td",cantidad) 
-
+	let borrar = __add_element("button","X")
+	let _borrar = __add_element("td")
 
 	_producto.setAttribute("contenteditable", true)
 	_cantidad.setAttribute("contenteditable", true)
 	_precio.setAttribute("contenteditable", true)
+	//_id.classList.add("filas")
+	//_producto.classList.add("filas")
+	//_cantidad.classList.add("filas")
+	//_precio.classList.add("filas")
 
-	_id.classList.add("filas")
-	_producto.classList.add("filas")
-	_cantidad.classList.add("filas")
-	_precio.classList.add("filas")
-
-
+	borrar.setAttribute("onclick",`eliminar_celda(this)`)
+	_borrar.classList.add("btn_delete")
 
 	fila.appendChild(_id)
 	fila.appendChild(_producto)
 	fila.appendChild(_precio)
 	fila.appendChild(_cantidad)
+	fila.appendChild(_borrar)
+	_borrar.appendChild(borrar)
 	return fila
 }
 
 async function send_to_db(){
+
+	if(validar_informacion() == false){return}
+
 
 	opts = {
 		method: "POST",
@@ -96,16 +146,59 @@ async function add_from_database(){
 
 
 
+
+
+
+
 var ID_GLOBAL = 0
+
+
+function eliminar_celda(e) {
+    // Preguntar al usuario antes de eliminar la celda
+    // var pregunta = confirm("¿Eliminar esta celda desplazará todos los IDs siguientes en -1. ¿Está seguro de que quiere eliminar esta celda?");
+    // if (!pregunta) {
+    //     return;
+    // }
+
+    var fila = e.closest("tr");
+
+    var id = parseInt(fila.cells[0].textContent);
+
+    var productos = document.getElementById("tabla");
+
+    var len = productos.rows.length;
+
+    for (var i = id+1; i < len; i++) {
+        var filaActual = productos.rows[i];
+        var idActual = parseInt(filaActual.cells[0].textContent);
+        filaActual.cells[0].textContent = idActual - 1;
+    }
+	fila.remove();
+}
+
+
+
+
+
+
 function add_fila(){
-	ID_GLOBAL+=1
+	tmp=[]
+	for(let i=0; i<leer_tabla().length;i++){
+		tmp.push(leer_tabla()[i].id)
+	}
+	console.log(tmp)
+
+	ID_GLOBAL = tmp.length >0 ? Math.max(...tmp)+1 : 1
+
+
 	let tabla = document.getElementById("tabla")
 		tableRow = __add_element("tr")
 		id = __add_element("td",ID_GLOBAL)
 		producto = __add_element("td")
 		cantidad = __add_element("td",0)
 		precio = __add_element("td",0)
-		borrar = __add_element("td","delete")
+		borrar = __add_element("button","X")
+		_borrar = __add_element("td")
 
 
 		tabla.appendChild(tableRow)
@@ -113,17 +206,16 @@ function add_fila(){
 		tableRow.appendChild(producto)
 		tableRow.appendChild(cantidad)
 		tableRow.appendChild(precio)
-		tableRow.appendChild(borrar)
+		tableRow.appendChild(_borrar)
+		_borrar.appendChild(borrar)
 		producto.setAttribute("contenteditable", true)
 		cantidad.setAttribute("contenteditable", true)
 		precio.setAttribute("contenteditable", true)
+		
+		
+		borrar.setAttribute("onclick",`eliminar_celda(this)`)
+		_borrar.classList.add("btn_delete")
 
-
-
-		id.classList.add("filas")
-		producto.classList.add("filas")
-		cantidad.classList.add("filas")
-		precio.classList.add("filas")
 
 }
 
@@ -161,10 +253,10 @@ function main(){
 
 
 
-		id.classList.add("filas")
-		producto.classList.add("filas")
-		cantidad.classList.add("filas")
-		precio.classList.add("filas")
+		//id.classList.add("filas")
+		//producto.classList.add("filas")
+		//cantidad.classList.add("filas")
+		//precio.classList.add("filas")
 
 	}
 

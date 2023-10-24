@@ -116,7 +116,7 @@ app.get('/', (req, res) => {
 
 
     console.log("Connected!");
-    res.sendFile("index.html",{root:__dirname})
+    res.sendFile("mejor que el otro.html",{root:__dirname})
 
 
   //res.send('Hello World!')

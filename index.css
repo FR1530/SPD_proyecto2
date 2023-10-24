@@ -1,40 +1,100 @@
-.body {
+body {
 	display: grid;
 	place-content: center;
 	font-family: sans-serif;
 	background-color: #B7EBDB;
+	color: #333;
+	margin: 0;
+	background-image: url('https://source.unsplash.com/1920x1080/?cats,dogs');
+	background-size: auto;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+}
+
+.overlay {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .titulo {
 	font-size: 3rem;
+	color: #26c2ed;
+	margin-bottom: 10px;
+}
+
+
+.error {
+	background-color: #f83535;
+}
+
+.btn_delete>button:hover{
+
+	background-color: #b31717;
+}
+
+.btn_delete>button{
+	border-radius: 10px;
+	border: solid #ff0000 1px;
+	box-shadow: 2px 2px 1px black;
+	text-justify:distribute;
+	color: white;
+	font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	font-size: large;
+	text-shadow: #000000;
+	text-shadow: 2px 2px 2px black ;
+	justify-content: center;
+	background-color: rgb(255, 94, 94);
+	width: 35px;
+	height: 35px;
+}
+.btn_delete{
+
+	padding-left: 25px;
+    padding-right: 0px;
+}
+
+.subtitulo {
+	font-size: 2rem;
+	color: #333;
+	margin-bottom: 20px;
 }
 
 .tableContainer {
-	display: flex;
-	flex-direction: column;
-
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	margin-top: 20px;
 }
+
 table {
-	 
 	border-collapse: collapse;
+	width: 100%;
 }
 
-.filas {
-	background-color: #CBD9EA;
-	border:1px solid #000;
-	padding-inline: 15px;
-	padding-block: 8px;
+th, td {
+	border: 1px solid #ddd;
+	padding: 15px;
+	text-align: left;
 }
 
 .container_buttons {
-	margin-top: 10px;
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .btn {
 	border-radius: 10px;
-	padding: 10px;
-	border: 1px solid #000;
-	background-color: #CBD9EA;
+	padding: 10px 20px;
+	border: 1px solid #333;
+	background-color: #26c2ed;
+	color: #fff;
 	cursor: pointer;
-	margin: 5px;
+}
+
+.btn:hover {
+	background-color: #1a8cbf;
 }

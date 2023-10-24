@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <script type="text/javascript" src="./index.js" type="module"></script>
+    <title>Veterinaria</title>
+</head>
+<body>
+    <div class="overlay">
+        <h1 class="titulo">Veterinaria La Patagonia</h1>
+        <h2 class="subtitulo">Gestión de productos</h2>
+    </div>
+
+
+
+    <div class="container_buttons">
+        <button class="btn" onclick="add_fila()">Agregar producto</button>
+        <button class="btn" onclick="send_to_db()">Actualizar</button>
+    </div>
+
+    <div class="tableContainer">
+        <table id="tabla">
+            <tr>
+                <th>Id</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+            </tr>
+        </table>
+    </div>
+    
+
+
+    <script type="text/javascript">
+        add_from_database()
+    </script>
+</body>
+</html>
