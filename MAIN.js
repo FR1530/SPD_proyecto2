@@ -58,6 +58,13 @@ function actualizar_database(request_body){
   tabla = contenido.tabla;
   arreglo = JSON.parse(contenido.arreglo)
 
+  con.query("delete from " + contenido.tabla + " where idproductos <1000", function (err, result) {
+    if (err) throw err;
+    console.log(JSON.stringify(result))
+  });
+
+
+
   for(let i=0; i <arreglo.length;i++){
 
     //ese string de abajo es nefasto
