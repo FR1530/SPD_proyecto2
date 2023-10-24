@@ -17,7 +17,7 @@ var con = mysql.createConnection({
 
 
 con.connect(function(err) {
-  // if (err) throw err;
+  if (err) throw err;
   console.log("Connected!");
 });
 
@@ -30,6 +30,12 @@ function pedir_tabla(table_name,res){
     res.json(result);
   });
 }
+
+
+
+
+
+
 
 /*
 @request body:
@@ -45,10 +51,34 @@ function pedir_tabla(table_name,res){
 */ 
 
 
-function actualizar_database(tabla="",arreglo=[]){
 
-  
+function actualizar_database(request_body){
 
+  contenido = request_body
+  tabla = contenido.tabla;
+  arreglo = JSON.parse(contenido.arreglo)
+
+  for(let i=0; i <arreglo.length;i++){
+
+    //ese string de abajo es nefasto
+    let valor_actual = arreglo[i]
+    let comando = "INSERT "+tabla+"(idproductos,precio,nombre,distribuidor,`cantidad disponible`, inventario_idinventario) "
+    + "values(" +valor_actual.id+","+valor_actual.precio+",'"+valor_actual.nombre+"', 'empresa',"+valor_actual.cantidad+",1)"
+
+    console.log({
+      index: valor_actual,
+      com: comando
+    })
+
+
+
+    con.query(comando, function (err, result) {
+      if (err) throw err;
+      console.log(JSON.stringify(result))
+    });
+
+
+  }
 
 
 
@@ -65,6 +95,7 @@ app.get('/tables/productos', (req, res) => {
 })
 
 app.post("/tables/update",(req,res) =>{
+  actualizar_database(req.body)
   console.log(req.body) 
   res.json(JSON.stringify({test:"a"}))
   
@@ -73,11 +104,16 @@ app.post("/tables/update",(req,res) =>{
 
 
 app.get('/', (req, res) => {
+
+
+
+
     console.log("Connected!");
     res.sendFile("index.html",{root:__dirname})
+
+
+  //res.send('Hello World!')
 })
-
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
